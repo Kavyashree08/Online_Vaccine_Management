@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VaccineMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BookingSlotMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CenterID" Type="int" Nullable="false" />
+    <Property Name="VaacineID" Type="int" Nullable="false" />
+    <Property Name="CenterName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VacineName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AvailableDate" Type="datetime" Nullable="false" />
+    <Property Name="ExpireDate" Type="datetime" Nullable="false" />
+    <Property Name="AvailabeVaccine" Type="int" Nullable="false" />
+    <Property Name="AgeLimit" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VaccineBookingMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CenterID" Type="int" Nullable="false" />
+    <Property Name="VaccineID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VaccineName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CenterName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="BookedDate" Type="datetime" Nullable="false" />
+    <Property Name="Startus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VaccineCenterMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PinCode" Type="int" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VaccineMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BookingSlotMaster_VaccineCenterMaster">
+    <End Role="VaccineCenterMaster" Type="Self.VaccineCenterMaster" Multiplicity="1" />
+    <End Role="BookingSlotMaster" Type="Self.BookingSlotMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineCenterMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BookingSlotMaster">
+        <PropertyRef Name="CenterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookingSlotMaster_VaccineMaster">
+    <End Role="VaccineMaster" Type="Self.VaccineMaster" Multiplicity="1" />
+    <End Role="BookingSlotMaster" Type="Self.BookingSlotMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BookingSlotMaster">
+        <PropertyRef Name="VaacineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VaccineBookingMaster_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+    <End Role="VaccineBookingMaster" Type="Self.VaccineBookingMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="VaccineBookingMaster">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VaccineBookingMaster_VaccineCenterMaster">
+    <End Role="VaccineCenterMaster" Type="Self.VaccineCenterMaster" Multiplicity="1" />
+    <End Role="VaccineBookingMaster" Type="Self.VaccineBookingMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineCenterMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="VaccineBookingMaster">
+        <PropertyRef Name="CenterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VaccineBookingMaster_VaccineMaster">
+    <End Role="VaccineMaster" Type="Self.VaccineMaster" Multiplicity="1" />
+    <End Role="VaccineBookingMaster" Type="Self.VaccineBookingMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="VaccineBookingMaster">
+        <PropertyRef Name="VaccineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VaccineMasterModelStoreContainer">
+    <EntitySet Name="BookingSlotMaster" EntityType="Self.BookingSlotMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VaccineBookingMaster" EntityType="Self.VaccineBookingMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VaccineCenterMaster" EntityType="Self.VaccineCenterMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VaccineMaster" EntityType="Self.VaccineMaster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BookingSlotMaster_VaccineCenterMaster" Association="Self.FK_BookingSlotMaster_VaccineCenterMaster">
+      <End Role="VaccineCenterMaster" EntitySet="VaccineCenterMaster" />
+      <End Role="BookingSlotMaster" EntitySet="BookingSlotMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookingSlotMaster_VaccineMaster" Association="Self.FK_BookingSlotMaster_VaccineMaster">
+      <End Role="VaccineMaster" EntitySet="VaccineMaster" />
+      <End Role="BookingSlotMaster" EntitySet="BookingSlotMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VaccineBookingMaster_UserMaster" Association="Self.FK_VaccineBookingMaster_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMaster" />
+      <End Role="VaccineBookingMaster" EntitySet="VaccineBookingMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VaccineBookingMaster_VaccineCenterMaster" Association="Self.FK_VaccineBookingMaster_VaccineCenterMaster">
+      <End Role="VaccineCenterMaster" EntitySet="VaccineCenterMaster" />
+      <End Role="VaccineBookingMaster" EntitySet="VaccineBookingMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VaccineBookingMaster_VaccineMaster" Association="Self.FK_VaccineBookingMaster_VaccineMaster">
+      <End Role="VaccineMaster" EntitySet="VaccineMaster" />
+      <End Role="VaccineBookingMaster" EntitySet="VaccineBookingMaster" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

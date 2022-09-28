@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Welcome.master.cs" Inherits="VaccineMangmentApp.Welcome" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="/Assets/Libraries/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-MM-yy',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+     <script type="text/javascript">  
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+     </script>
+</head>
+<body   onLoad="preventBack();">
+    <nav class="navbar navbar-expand-lg navbar-light  navbar-right" style="background-color:#b7cac1; color:white!important">
+  <a class="navbar-brand" href="#">Online Vaccine System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown" style="color:white">
+    <ul class="navbar-nav  navbar-right">
+      <li class="nav-item active">
+        <a class="nav-link" href="Welcome.aspx">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="About.aspx">About Us</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="Contact.aspx">Contact Us</a>
+      </li>
+      <%--<li class="nav-item">
+        <a class="nav-link" href="ContactUs.aspx">Contact Us</a>
+      </li>--%>
+        <li class="nav-item">
+        <a class="nav-link" href="Registration.aspx">Register</a>
+      </li>
+        
+         <li class="nav-item">
+        <a class="nav-link" href="Login.aspx">Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <asp:ContentPlaceHolder ID="mybody" runat="server">
+        </asp:ContentPlaceHolder>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="VaccineMangmentApp.AdminPanel.Admin" %>
+
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Vaccine Management </title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="../../Assets/Libraries/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-MM-yy',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+  
+    <script type="text/javascript">  
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+</head>
+<body  onLoad="preventBack();" >
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#b7cac1;color:white">
+  <a class="navbar-brand" href="#">Admin Vaccine Management Panel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="Home.aspx">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="AddVaccineType.aspx">Add Vaccine</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="AddVaccineCenter.aspx">Add Vaccine Center</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="AddVaccineSlot.aspx">Add Vaccine Slot</a>
+      </li>
+            <li class="nav-item">
+        <a class="nav-link" href="UserDetails.aspx">User Details</a>
+      </li>
+         <li class="nav-item">
+        <a class="nav-link" href="/Welcome.aspx">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <asp:ContentPlaceHolder ID="mybody" runat="server">
+        </asp:ContentPlaceHolder>
+</body>
+</html>
